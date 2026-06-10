@@ -15,6 +15,7 @@ Grafana dashboards
 Docker Compose orchestration
 Health monitoring and observability
 Architecture
+
                            +----------------+
                            |   API Gateway  |
                            |    Port 8080   |
