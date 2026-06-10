@@ -78,6 +78,7 @@ GET /v1/catalog/service/service-a
 Instead of using hardcoded IP addresses, the gateway discovers service locations at runtime.
 
 Request Flow
+
 Client Request
       |
       v
@@ -91,6 +92,7 @@ Target Service
       |
       v
 Response Returned
+
 Getting Started
 Prerequisites
 
@@ -221,48 +223,5 @@ PowerShell
 
 Observe metrics changing in Grafana.
 
-Learning Outcomes
 
-This project demonstrates:
-
-Service discovery concepts
-Consul service registration
-Dynamic service lookup
-API Gateway implementation
-Microservices communication
-Container orchestration
-Infrastructure observability
-Metrics collection and visualization
-Future Improvements
-Consul health checks
-Load balancing across service instances
-Consul Connect service mesh
-Distributed tracing with Jaeger
-Centralized logging with ELK Stack
-Kubernetes deployment
-Helm charts
-CI/CD with GitHub Actions
-Infrastructure as Code using Terraform
-Screenshots
-
-Add screenshots of:
-
-Consul Services Dashboard
-API Gateway Requests
-Prometheus Targets
-Grafana Dashboard
-Docker Containers Running
-Author
-
-Mohamed Iheb
-
-DevOps & Cloud Engineer
-
-Focused on:
-
-Cloud Computing
-Kubernetes
-DevOps Automation
-Observability
-Infrastructure as Code
 
