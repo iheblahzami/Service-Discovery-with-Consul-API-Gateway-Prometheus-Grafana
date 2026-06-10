@@ -46,37 +46,7 @@ Architecture
           |  Prometheus   |                    |    Grafana    |
           |    9090       |                    |     3000      |
           +---------------+                    +---------------+
-Project Structure
-service-discovery-consul/
 
-├── docker-compose.yml
-│
-├── consul/
-│
-├── gateway/
-│   ├── Dockerfile
-│   ├── package.json
-│   └── server.js
-│
-├── service-a/
-│   ├── Dockerfile
-│   ├── package.json
-│   └── server.js
-│
-├── service-b/
-│   ├── Dockerfile
-│   ├── package.json
-│   └── server.js
-│
-├── service-c/
-│   ├── Dockerfile
-│   ├── package.json
-│   └── server.js
-│
-├── prometheus/
-│   └── prometheus.yml
-│
-└── README.md
 Technologies Used
 Node.js
 Express.js
