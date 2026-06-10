@@ -1,6 +1,6 @@
 # Service-Discovery-with-Consul-API-Gateway-Prometheus-Grafana
 A hands-on DevOps project demonstrating service discovery in a microservices architecture using Consul, along with monitoring and observability using Prometheus and Grafana.
-
+https://roadmap.sh/projects/service-discovery
 Overview
 
 This project simulates a microservices environment where multiple services register themselves with Consul and are discovered dynamically by an API Gateway. The monitoring stack collects and visualizes metrics from all components.
