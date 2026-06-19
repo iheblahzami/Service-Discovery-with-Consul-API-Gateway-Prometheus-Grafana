@@ -1,233 +1,492 @@
-# Service-Discovery-with-Consul-API-Gateway-Prometheus-Grafana
-A hands-on DevOps project demonstrating service discovery in a microservices architecture using Consul, along with monitoring and observability using Prometheus and Grafana.
+
 https://roadmap.sh/projects/service-discovery
 
-Overview
+# 🚀 Service Discovery with Consul, API Gateway, Prometheus & Grafana
 
-This project simulates a microservices environment where multiple services register themselves with Consul and are discovered dynamically by an API Gateway. The monitoring stack collects and visualizes metrics from all components.
+A hands-on microservices project demonstrating **Service Discovery**, **API Gateway Routing**, **Monitoring**, and **Observability** using Consul, Docker, Prometheus, and Grafana.
 
-Features
+---
 
-Service discovery using Consul
-Automatic service registration
-API Gateway for request routing
-Three dummy microservices
-Prometheus metrics collection
-Grafana dashboards
-Docker Compose orchestration
-Health monitoring and observability
+## 📖 Overview
 
-Architecture
+In a microservices architecture, services need a reliable way to find and communicate with each other without hardcoding IP addresses or hostnames.
 
+This project demonstrates how to:
 
-                           +----------------+
-                           |   API Gateway  |
-                           |    Port 8080   |
-                           +--------+-------+
-                                    |
-                                    |
-                           Service Discovery
-                                    |
-                                    v
-                           +----------------+
-                           |     Consul     |
-                           |    Port 8500   |
-                           +----------------+
-                            /      |      \
-                           /       |       \
-                          v        v        v
+- Register services dynamically with Consul
+- Discover services through Consul's API
+- Route requests through a centralized API Gateway
+- Monitor services using Prometheus
+- Visualize metrics with Grafana
+- Deploy everything with Docker Compose
 
-                   +---------+ +---------+ +---------+
-                   |Service A| |Service B| |Service C|
-                   |  3001   | |  3002   | |  3003   |
-                   +---------+ +---------+ +---------+
+---
 
-                              Monitoring
-                                    |
-                 +------------------+------------------+
-                 |                                     |
-                 v                                     v
-          +---------------+                    +---------------+
-          |  Prometheus   |                    |    Grafana    |
-          |    9090       |                    |     3000      |
-          +---------------+                    +---------------+
+## 🏗️ Architecture
 
-Technologies Used
+```text
+                              ┌─────────────────┐
+                              │   API Gateway   │
+                              │    Port 8080    │
+                              └────────┬────────┘
+                                       │
+                          Service Discovery Requests
+                                       │
+                                       ▼
+                              ┌─────────────────┐
+                              │     Consul      │
+                              │    Port 8500    │
+                              └─────────────────┘
+                                 ▲      ▲      ▲
+                                 │      │      │
+                   ┌─────────────┘      │      └─────────────┐
+                   │                    │                    │
+                   ▼                    ▼                    ▼
 
-Node.js
-Express.js
-Docker
-Docker Compose
-Consul
-Prometheus
-Grafana
-How It Works
-Service Registration
+            ┌────────────┐     ┌────────────┐     ┌────────────┐
+            │ Service A  │     │ Service B  │     │ Service C  │
+            │ Port 3001  │     │ Port 3002  │     │ Port 3003  │
+            └────────────┘     └────────────┘     └────────────┘
 
-Each microservice automatically registers itself with Consul when it starts.
+                   ▲                    ▲                    ▲
+                   └────────────┬───────┴───────────┬────────┘
+                                │                   │
+                                ▼                   ▼
 
-Example registration:
+                        ┌──────────────┐   ┌──────────────┐
+                        │ Prometheus   │──▶│   Grafana    │
+                        │ Port 9090    │   │ Port 3000    │
+                        └──────────────┘   └──────────────┘
+```
 
-{
-  "Name": "service-a",
-  "ID": "service-a",
-  "Address": "service-a",
-  "Port": 3001
-}
+---
 
-Service Discovery
+## ✨ Features
 
-The API Gateway queries Consul's Catalog API to locate available services dynamically.
+### Service Discovery
+- Dynamic service registration with Consul
+- Automatic service lookup
+- Decoupled service communication
 
-GET /v1/catalog/service/service-a
+### API Gateway
+- Single entry point for all services
+- Service routing using Consul discovery
+- Simplified client access
 
-Instead of using hardcoded IP addresses, the gateway discovers service locations at runtime.
+### Monitoring & Observability
+- Prometheus metrics collection
+- Service-level metrics
+- Gateway metrics
+- Consul metrics
 
-Request Flow
+### Visualization
+- Grafana dashboards
+- Real-time monitoring
+- Resource utilization tracking
 
-Client Request
-      |
-      v
-API Gateway
-      |
-      v
-Consul Lookup
-      |
-      v
-Target Service
-      |
-      v
-Response Returned
+### Containerized Deployment
+- Dockerized services
+- Docker Compose orchestration
+- Simple local setup
 
-Getting Started
-Prerequisites
+---
 
-Install:
+## 🛠️ Technology Stack
 
-Docker
-Docker Compose
+| Component | Technology |
+|------------|------------|
+| Service Discovery | Consul |
+| API Gateway | Node.js + Express |
+| Services | Node.js + Express |
+| Monitoring | Prometheus |
+| Visualization | Grafana |
+| Containerization | Docker |
+| Orchestration | Docker Compose |
+
+---
+
+## 📂 Project Structure
+
+```text
+service-discovery-consul/
+│
+├── docker-compose.yml
+│
+├── service-a/
+│   ├── Dockerfile
+│   ├── package.json
+│   └── server.js
+│
+├── service-b/
+│   ├── Dockerfile
+│   ├── package.json
+│   └── server.js
+│
+├── service-c/
+│   ├── Dockerfile
+│   ├── package.json
+│   └── server.js
+│
+├── gateway/
+│   ├── Dockerfile
+│   ├── package.json
+│   └── server.js
+│
+├── prometheus/
+│   └── prometheus.yml
+│
+└── README.md
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Docker
+- Docker Compose
 
 Verify installation:
 
+```bash
 docker --version
 docker compose version
-Clone Repository
+```
+
+---
+
+## 🔧 Installation
+
+Clone the repository:
+
+```bash
 git clone https://github.com/your-username/service-discovery-consul.git
 
 cd service-discovery-consul
-Build and Run
+```
+
+Build and start all containers:
+
+```bash
 docker compose up --build
+```
 
-All services will start automatically.
+Run in detached mode:
 
-Accessing Components
-Component	URL
-API Gateway	http://localhost:8080
-Consul UI	http://localhost:8500
-Prometheus	http://localhost:9090
-Grafana	http://localhost:3000
-Testing Services
-Direct Service Access
+```bash
+docker compose up -d --build
+```
 
+---
+
+## 🌐 Available Services
+
+| Service | URL |
+|----------|------|
+| API Gateway | http://localhost:8080 |
+| Consul UI | http://localhost:8500 |
+| Prometheus | http://localhost:9090 |
+| Grafana | http://localhost:3000 |
+
+---
+
+## 🔍 Service Discovery Workflow
+
+### 1. Service Startup
+
+Each service starts and registers itself with Consul:
+
+```text
 Service A
+   │
+   ├── Register Service
+   ▼
+ Consul
+```
 
-curl http://localhost:3001/info
+### 2. Client Request
 
-Service B
+```http
+GET /service-a/info
+```
 
-curl http://localhost:3002/info
+Request hits the API Gateway.
 
-Service C
+### 3. Service Lookup
 
-curl http://localhost:3003/info
+Gateway queries Consul:
 
-Example Response:
+```http
+GET /v1/catalog/service/service-a
+```
 
+### 4. Routing
+
+Gateway retrieves:
+
+```json
+{
+  "address": "service-a",
+  "port": 3001
+}
+```
+
+### 5. Response
+
+Gateway forwards the request and returns:
+
+```json
 {
   "service": "service-a",
-  "timestamp": "2026-06-10T12:30:45.000Z"
+  "timestamp": "2026-06-19T12:00:00Z"
 }
-Through API Gateway
+```
 
-Service A
+---
 
-curl http://localhost:8080/service-a/info
+## 📡 API Endpoints
 
-Service B
+### Service Information
 
-curl http://localhost:8080/service-b/info
+#### Service A
 
-Service C
+```http
+GET /service-a/info
+```
 
-curl http://localhost:8080/service-c/info
-Consul Verification
+#### Service B
 
-List all registered services:
+```http
+GET /service-b/info
+```
 
-curl http://localhost:8500/v1/catalog/services
+#### Service C
 
-Expected Output:
+```http
+GET /service-c/info
+```
 
+Example response:
+
+```json
 {
-  "service-a": [],
-  "service-b": [],
-  "service-c": []
+  "service": "service-a",
+  "timestamp": "2026-06-19T12:00:00Z"
 }
+```
 
-Retrieve details for a specific service:
+---
 
-curl http://localhost:8500/v1/catalog/service/service-a
-Monitoring
-Prometheus
+## 📈 Monitoring
 
-Prometheus scrapes metrics from:
+### Metrics Endpoint
 
-Service A
-Service B
-Service C
-API Gateway
-Consul
+Every service exposes:
 
-Useful queries:
+```http
+GET /metrics
+```
 
-up
+Collected by Prometheus automatically.
+
+---
+
+### Example Metrics
+
+```prometheus
 http_requests_total
+```
+
+```prometheus
 process_cpu_user_seconds_total
+```
+
+```prometheus
 process_resident_memory_bytes
-Grafana
+```
 
-Default Login:
+```prometheus
+up
+```
 
-Username: admin
-Password: admin
+---
 
-Add Prometheus datasource:
+## 📊 Grafana Dashboard
 
-http://prometheus:9090
+Suggested panels:
 
-Suggested Dashboard Panels:
+### Request Count
 
-Panel	Query
-Request Count	http_requests_total
-Service Health	up
-Memory Usage	process_resident_memory_bytes
-CPU Usage	rate(process_cpu_user_seconds_total[1m])
-Generate Test Traffic
+```promql
+http_requests_total
+```
 
-Linux/macOS
+### Service Health
 
+```promql
+up
+```
+
+### Memory Usage
+
+```promql
+process_resident_memory_bytes
+```
+
+### CPU Usage
+
+```promql
+rate(process_cpu_user_seconds_total[1m])
+```
+
+---
+
+## 🧪 Testing
+
+### Service A
+
+```bash
+curl http://localhost:8080/service-a/info
+```
+
+### Service B
+
+```bash
+curl http://localhost:8080/service-b/info
+```
+
+### Service C
+
+```bash
+curl http://localhost:8080/service-c/info
+```
+
+---
+
+### Generate Load
+
+```bash
 for i in {1..100}
 do
-curl http://localhost:8080/service-a/info
+  curl http://localhost:8080/service-a/info
 done
+```
 
-PowerShell
+Observe the metrics update in Grafana.
 
-1..100 | ForEach-Object {
-    Invoke-WebRequest http://localhost:8080/service-a/info
+---
+
+## 📚 Learning Outcomes
+
+Through this project you will learn:
+
+- Service Discovery fundamentals
+- Consul registration and lookup mechanisms
+- API Gateway design patterns
+- Service-to-Service communication
+- Monitoring with Prometheus
+- Dashboard creation with Grafana
+- Docker-based microservice deployments
+- Basic observability practices
+
+---
+
+## 🔮 Future Improvements
+
+### Service Health Checks
+
+Add Consul health checks:
+
+```json
+{
+  "Check": {
+    "HTTP": "http://service-a:3001/info",
+    "Interval": "10s"
+  }
 }
+```
 
-Observe metrics changing in Grafana.
+### Load Balancing
+
+Run multiple service instances:
+
+```bash
+docker compose up --scale service-a=3
+```
+
+### Distributed Tracing
+
+Add:
+
+- Jaeger
+- OpenTelemetry
+
+### Security
+
+- TLS communication
+- Consul ACLs
+- API authentication
+
+### Kubernetes Migration
+
+Deploy the same architecture using:
+
+- Kubernetes
+- Helm
+- Consul on Kubernetes
+
+---
+
+## 🎯 Key Concepts Demonstrated
+
+✅ Microservices Architecture
+
+✅ Service Discovery
+
+✅ API Gateway Pattern
+
+✅ Dynamic Service Registration
+
+✅ Observability
+
+✅ Metrics Collection
+
+✅ Monitoring Dashboards
+
+✅ Containerization
+
+✅ Docker Networking
+
+---
+
+## 📸 Screenshots
+
+### Consul Services
+
+Add screenshot here:
+
+```text
+screenshots/consul-services.png
+```
+
+### Prometheus Targets
+
+Add screenshot here:
+
+```text
+screenshots/prometheus-targets.png
+```
+
+### Grafana Dashboard
+
+Add screenshot here:
+
+```text
+screenshots/grafana-dashboard.png
+```
+
+---
 
 
 
